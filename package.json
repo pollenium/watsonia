@@ -1,0 +1,45 @@
+{
+  "name": "pollenium-watsonia",
+  "version": "0.0.0",
+  "description": "",
+  "main": "node/index.ts",
+  "scripts": {
+    "tsc": "node_modules/typescript/bin/tsc",
+    "browserify": "browserify ./node/index.js --standalone watsonia > browser/index.js",
+    "build": "grunt build",
+    "start": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pollenium/watsonia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pollenium/watsonia/issues"
+  },
+  "homepage": "https://github.com/pollenium/watsonia#readme",
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "byots": "^3.8.0-dev.20191221.4.27",
+    "grunt": "^1.0.4",
+    "grunt-contrib": "^0.11.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-run": "^0.8.1",
+    "grunt-ts": "^6.0.0-beta.22",
+    "http-server": "^0.12.0",
+    "load-grunt-tasks": "^5.1.0",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.0.0",
+    "browserify": "^16.5.0",
+    "csstype": "^2.6.8",
+    "file-saver": "^2.0.2",
+    "keythereum": "^1.0.4",
+    "lodash.debounce": "^4.0.8",
+    "pollenium-buttercup": "^13.3.1"
+  }
+}

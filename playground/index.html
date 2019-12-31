@@ -1,0 +1,322 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" integrity="sha256-7VVaJ5GDwFQiLIc+eNksQLUSSY5JNZtqv9o2BI8UGYg=" crossorigin="anonymous" />
+  <link href="//fonts.googleapis.com/css?family=Chakra Petch&subset=latin" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link href="//fonts.googleapis.com/css?family=Bungee Hairline&subset=latin" rel="stylesheet" type="text/css">
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @font-face {
+    font-family: 'alphanum20';
+    src:url('/media/fonts/alphanum20/alphanum20.eot?-a6m7hz');
+    src:url('/media/fonts/alphanum20/alphanum20.eot?#iefix-a6m7hz') format('embedded-opentype'),
+        url('/media/fonts/alphanum20/alphanum20.woff?-a6m7hz') format('woff'),
+        url('/media/fonts/alphanum20/alphanum20.ttf?-a6m7hz') format('truetype'),
+        url('/media/fonts/alphanum20/alphanum20.svg?-a6m7hz#alphanum20') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+    body {
+      font-family: 'alphanum20', sans-serif;
+      font-weight: 1000;
+      background-color: 'black';
+      overflow: hidden;
+      color: #fff;
+      font-size: 16px;
+    }
+    .backgrounds {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .background-layer {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-color: #000;
+    }
+
+    .background-next {
+      display:none;
+    }
+
+    .background-layer-frame {
+      height: 100%;
+      overflow: hidden;
+      width: calc(100% + 80px);
+      margin-left: -40px;
+      position: relative;
+    }
+
+    .background-layer-frame-inset {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+      -webkit-box-shadow: inset 0px -50px 25px 10px #000000;
+      box-shadow: inset 0px -49px 36px 11px #000000;
+    }
+
+    .background-layer-image {
+      min-width: 100%;
+      min-height: 50%;
+      filter: blur(40px) brightness(40%);
+    }
+
+    .foreground {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    .navbars {
+      box-shadow: 0 8px 8px -2px rgba(0,0,0,.2);
+    }
+    .navbar {
+      color: white;
+      width: 100%;
+    }
+    .navbar-primary {
+      font-size: 24px;
+      backdrop-filter: blur(2px);
+    }
+    .navbar-primary-container {
+      padding: 18px;
+    }
+    .navbar-secondary-items {
+      white-space: nowrap;
+      padding: 18px;
+      overflow-x: auto;
+    }
+
+    .navbar-secondary-item {
+      margin-right: 40px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .navbar-column {
+
+    }
+    .navbar-center {
+      text-align: center;
+      flex: 1;
+    }
+    .navbar-right {
+      text-align: right;
+    }
+
+    .main {
+      flex: 1;
+      overflow-y: scroll;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .market {
+      padding-bottom: 10px;
+      min-height: 100%;
+    }
+
+    @media screen and (min-width: 800px) {
+      .market {
+        margin-top: 40px;
+      }
+
+    }
+
+
+    .market-frame {
+      max-width: 100%;
+    }
+
+    .market-image {
+      width: 100%;
+      flex-grow: 0;
+      align-self: center;
+    }
+
+    .market-page {
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    a {
+      cursor: pointer;
+      color: #666;
+    }
+
+    a:hover {
+
+    }
+
+    a.selected {
+      color: #fff
+    }
+
+    .pad {
+      padding: 18px;
+    }
+
+    .backdrop-blur {
+      backdrop-filter: blur(2px);
+    }
+
+    .bg-dark {
+      background-color: rgba(0,0,0,.6)
+    }
+    .bg-md {
+      background-color: rgba(0,0,0,.4)
+    }
+
+    .text-lg {}
+
+    .form-control-group {
+      padding: 8px 0 8px;
+      border-radius: 2px;
+      margin-top: 18px;
+      position: relative;
+      border-bottom: 4px solid #eee;
+    }
+    .form-control-placeholder {
+
+    }
+    .form-control {
+      background-color: transparent;
+      border: none;
+      height: 100%;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="backgrounds">
+      <div class="background-layer background-current">
+        <div class="background-layer-frame">
+          <div class="background-layer-frame-inset"></div>
+          <img class="background-layer-image" src="/media/market-images/trump-shocked.jpg">
+        </div>
+      </div>
+      <div class="background-layer background-next">
+        <div class="background-layer-frame">
+          <img class="background-layer-image" src="/media/market-images/trump-victorious.jpg">
+        </div>
+      </div>
+    </div>
+    <div class="foreground">
+      <div class="navbars">
+        <div class="navbar navbar-primary backdrop-blur bg-dark">
+          <div class="container navbar-primary-container flex">
+            <div class="navbar-column navbar-flank">
+            </div>
+            <div class="navbar-column navbar-center">
+              <h1>Watsonia</h1>
+            </div>
+            <div class="navbar-column navbar-flank navbar-right">
+              <a class="lnr lnr-cog"></a>
+              <a class="lnr lnr-user"></a>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-secondary backdrop-blur bg-md">
+          <div class="navbar-secondary-items container">
+            <a class="navbar-secondary-item selected">
+              Trump Convicted 2020
+            </a>
+            <a class="navbar-secondary-item">
+              Reccession 2020
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="market container">
+          <div class="market-frame">
+            <img class="market-image" src="/media/market-images/trump-shocked.jpg">
+          </div>
+          <div class="navbar navbar-secondary backdrop-blur bg-dark">
+            <div class="navbar-secondary-items">
+              <a class="navbar-secondary-item">
+                Prices
+              </a>
+              <a class="navbar-secondary-item">
+                Market
+              </a>
+              <a class="navbar-secondary-item">
+                Buy Yes
+              </a>
+              <a class="navbar-secondary-item">
+                Sell Yes
+              </a>
+              <a class="navbar-secondary-item">
+                Buy No
+              </a>
+              <a class="navbar-secondary-item selected">
+                Sell No
+              </a>
+            </div>
+          </div>
+          <div class="market-page backdrop-blur">
+            <div class="pad bg-dark">Do You Have An Account?</div>
+            <div class="navbar navbar-secondary bg-dark">
+              <div class="navbar-secondary-items">
+                <a class="navbar-secondary-item">
+                  Yes
+                </a>
+                <a class="navbar-secondary-item selected">
+                  No
+                </a>
+              </div>
+            </div>
+            <div class="pad bg-dark">
+              No worries. Creating one takes only a 30 seconds. And we won't need an email or any personally identifying information.
+              <div class="form-control-group">
+                <span class="form-control-placeholder">Password</span>
+                <input class="form-control">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="market container">
+          <div class="market-frame">
+            <img class="market-image" src="/media/market-images/trump-shocked.jpg">
+          </div>
+        </div>
+        <div class="market container">
+          <div class="market-frame">
+            <img class="market-image" src="/media/market-images/trump-shocked.jpg">
+          </div>
+        </div>
+        <div class="market container">
+          <div class="market-frame">
+            <img class="market-image" src="/media/market-images/trump-shocked.jpg">
+          </div>
+        </div>
+        <div class="market container">
+          <div class="market-frame">
+            <img class="market-image" src="/media/market-images/trump-shocked.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
