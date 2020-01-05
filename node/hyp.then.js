@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var utils_1 = require("./utils");
 var then;
 (function (then) {
     function empty(ui) {
@@ -20,6 +21,22 @@ var then;
         };
     }
     then.setStyle = setStyle;
+    function setStyles() {
+        var styleStructs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            styleStructs[_i] = arguments[_i];
+        }
+        return function (ui) {
+            var styleStuct = {};
+            styleStructs.forEach(function (_styleStruct) {
+                Object.assign(styleStuct, _styleStruct);
+            });
+            Object.keys(styleStuct).forEach(function (key) {
+                ui.and(then.setStyle(key, styleStuct[key]));
+            });
+        };
+    }
+    then.setStyles = setStyles;
     function removeStyles() {
         var keys = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -66,6 +83,12 @@ var then;
         };
     }
     then.append = append;
+    function appendTo(parentUi) {
+        return function (ui) {
+            parentUi.and(then.append(ui));
+        };
+    }
+    then.appendTo = appendTo;
     function setAttribute(key, value) {
         return function (ui) {
             ui.element.setAttribute(key, value);
@@ -95,4 +118,21 @@ var then;
         };
     }
     then.setIsHidden = setIsHidden;
+    function onDom(eventName, onDomFunc) {
+        return function (ui) {
+            ui.element.addEventListener(eventName, onDomFunc);
+        };
+    }
+    then.onDom = onDom;
+    function onClick(onClickFunc) {
+        return function (ui) {
+            if (utils_1.getIsTouch()) {
+                ui.and(onDom('touchstart', onClickFunc));
+            }
+            else {
+                ui.and(onDom('click', onClickFunc));
+            }
+        };
+    }
+    then.onClick = onClick;
 })(then = exports.then || (exports.then = {}));

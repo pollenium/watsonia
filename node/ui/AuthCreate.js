@@ -53,123 +53,153 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
-var PasswordInputGroup_1 = require("./PasswordInputGroup");
+var FormControlPassword_1 = require("./FormControlPassword");
+var FormControlText_1 = require("./FormControlText");
 var FormGroup_1 = require("./FormGroup");
 var Btn_1 = require("./Btn");
-var Alert_1 = require("./Alert");
-var Spinner_1 = require("./Spinner");
-var InternalAnchor_1 = require("./InternalAnchor");
-var keythereum_1 = __importDefault(require("keythereum"));
-var file_saver_1 = __importDefault(require("file-saver"));
-var boot_1 = require("../boot");
+var BlurbSpinner_1 = require("./BlurbSpinner");
+var SpacerSmall_1 = require("./SpacerSmall");
+var SpacerLarge_1 = require("./SpacerLarge");
+var SpacerHuge_1 = require("./SpacerHuge");
+var Blurb_1 = require("./Blurb");
+var Auth_1 = require("./Auth");
+var LinearIcon_1 = require("./LinearIcon");
+var utils_1 = require("../utils");
+var delay_1 = __importDefault(require("delay"));
+var Keystore_1 = require("../classes/Keystore");
 var UiAuthCreate = /** @class */ (function (_super) {
     __extends(UiAuthCreate, _super);
-    function UiAuthCreate() {
+    function UiAuthCreate(uiAuth) {
         var _this = _super.call(this) || this;
+        _this.uiAuth = uiAuth;
         _this.password0 = '';
         _this.password1 = '';
+        _this.nickname = '';
         _this.isSubmittable = false;
-        _this.and(hyp_1.then.append(new hyp_1.UiHeading('h3')
-            .and(hyp_1.then.setText('Create a New Account'))));
-        _this.and(hyp_1.then.append(_this.uiForm = new hyp_1.UiForm()
-            .and(hyp_1.then.append(new FormGroup_1.UiFormGroup({
-            labelText: 'Password',
+        _this.and(hyp_1.then.setStyles(hyp_1.styles.container, hyp_1.styles.pad));
+        _this.and(hyp_1.then.append(_this.uiForm = new hyp_1.UiForm().and(hyp_1.then.append(_this.uiFormGroupPassword0 = new FormGroup_1.UiFormGroup({
+            labelText: 'Password:',
             helperText: 'Don\'t forget your password. There is no way to reset it.',
-            ui: new PasswordInputGroup_1.UiPasswordInputGroup().and(function (passwordInputGroup) {
-                passwordInputGroup.uiFormControl.element.addEventListener('input', function () {
-                    _this.password0 = passwordInputGroup.uiFormControl.element.value;
-                    _this.onPasswordInput();
+            uiFormControl: new FormControlPassword_1.UiFormControlPassword().and(function (uiFormControlPassword) {
+                uiFormControlPassword.valueEmitter.on(function (password) {
+                    _this.password0 = password;
+                    _this.handleFormUpdate(false);
                 });
             })
-        })))
-            .and(hyp_1.then.append(new FormGroup_1.UiFormGroup({
-            labelText: 'Repeat Password',
-            ui: new PasswordInputGroup_1.UiPasswordInputGroup().and(function (passwordInputGroup) {
-                passwordInputGroup.uiFormControl.element.addEventListener('input', function () {
-                    _this.password1 = passwordInputGroup.uiFormControl.element.value;
-                    _this.onPasswordInput();
+        }), new SpacerLarge_1.UiSpacerLarge, _this.uiFormGroupPassword1 = new FormGroup_1.UiFormGroup({
+            labelText: 'Repeat Password:',
+            uiFormControl: new FormControlPassword_1.UiFormControlPassword().and(function (uiFormControlPassword) {
+                uiFormControlPassword.valueEmitter.on(function (password) {
+                    _this.password1 = password;
+                    _this.handleFormUpdate(false);
                 });
             })
-        })))
-            .and(hyp_1.then.append(_this.uiBtn = new Btn_1.UiBtn(boot_1.BootColor.PRIMARY, boot_1.BootSize.MD)
-            .and(hyp_1.then.setText('Create Account'))
-            .and(hyp_1.then.setAttribute('disabled', 'true'))))
-            .and(function (uiForm) {
-            uiForm.element.addEventListener('submit', function (event) {
-                event.preventDefault();
-                _this.onSubmit();
-            });
-        })));
-        _this.and(hyp_1.then.append(_this.uiCreating = new hyp_1.UiDiv()
-            .and(hyp_1.then.setIsHidden(true))
-            .and(hyp_1.then.append(new Alert_1.UiAlert(boot_1.BootColor.INFO)
-            .and(hyp_1.then.append(new Spinner_1.UiSpinner(), new hyp_1.UiSpan().and(hyp_1.then.setText('Creating your account. This may take a few seconds.'))))))));
-        _this.and(hyp_1.then.append(_this.uiCreating = new hyp_1.UiDiv()
-            .and(hyp_1.then.setIsHidden(true))
-            .and(hyp_1.then.append(new Alert_1.UiAlert(boot_1.BootColor.SUCCESS)
-            .and(hyp_1.then.append(new hyp_1.UiHeading('h6').and(hyp_1.then.setText('Account Created!')), new hyp_1.UiSpan().and(hyp_1.then.setText('A download should have been started. If not, please download your login file before continuing to the login page.'))))))
-            .and(hyp_1.then.append(new hyp_1.UiDiv()
-            .and(hyp_1.then.setStyle('text-align', 'center'))
-            .and(hyp_1.then.append(new Btn_1.UiBtn(boot_1.BootColor.LIGHT, boot_1.BootSize.MD)
-            .and(hyp_1.then.setText('Download Login File'))
-            .and(hyp_1.then.setStyle('margin-right', '5px'))
-            .and(function (uiBtn) {
-            uiBtn.element.addEventListener('click', function () {
-                _this.download();
-            });
-        })))
-            .and(hyp_1.then.append(new InternalAnchor_1.UiInternalAnchor(['auth', 'login'])
-            .and(hyp_1.then.setText('Proceed to Login'))
-            .and(hyp_1.then.addClasses('btn', "btn-" + boot_1.BootColor.PRIMARY, "btn-" + boot_1.BootSize.MD))))))));
+        }), new SpacerLarge_1.UiSpacerLarge, new FormGroup_1.UiFormGroup({
+            labelText: 'Account Nickname (Optional):',
+            uiFormControl: new FormControlText_1.UiFormControlText().and(function (uiFormControlText) {
+                uiFormControlText.setUiPrepend(new LinearIcon_1.UiLinearIcon('label'));
+                uiFormControlText.valueEmitter.on(function (nickname) {
+                    _this.nickname = nickname;
+                }),
+                    uiFormControlText.setValue('First Account');
+            }),
+            helperText: 'This is only used to differentaite your logins when you have multiple accounts'
+        }), new SpacerHuge_1.UiSpacerHuge, _this.uiBtn = new Btn_1.UiBtn({
+            isDisabled: true,
+            linearIconClassName: 'user',
+            text: 'Create Account'
+        })), hyp_1.then.onDom('submit', function (event) {
+            event.preventDefault();
+            _this.onSubmit();
+        }))));
+        _this.and(hyp_1.then.append(_this.uiCreating = new hyp_1.UiDiv().and(hyp_1.then.setIsHidden(true), hyp_1.then.append(new BlurbSpinner_1.UiBlurbSpinner('Creating your account. This may take a few seconds.')))));
+        _this.and(hyp_1.then.append(_this.uiCreated = new hyp_1.UiDiv().and(hyp_1.then.setIsHidden(true), hyp_1.then.append(new Blurb_1.UiBlurb({
+            linearIconClassName: 'user',
+            text: 'Account Created!\r\n'
+        }), new SpacerSmall_1.UiSpacerSmall(), new Blurb_1.UiBlurb({
+            linearIconClassName: 'download',
+            text: 'A download should have been started. If not, please download your login file before continuing to the login page.'
+        }), new SpacerLarge_1.UiSpacerLarge(), new hyp_1.UiDiv().and(hyp_1.then.setStyle('text-align', 'center'), hyp_1.then.append(new Btn_1.UiBtn({
+            linearIconClassName: 'file-lock',
+            text: 'Download Login File'
+        }).and(hyp_1.then.setStyle('margin-right', '8px'), hyp_1.then.onClick(function (uiBtn) {
+            _this.keystore.download();
+        })), new Btn_1.UiBtn({
+            linearIconClassName: 'lock',
+            text: 'Proceed to Login'
+        }).and(hyp_1.then.onClick(function (uiBtn) {
+            _this.uiAuth.setAuthState(Auth_1.AuthState.LOGIN);
+        }))))))));
         return _this;
     }
     UiAuthCreate.prototype.setIsSubmittable = function (isSubmittable) {
         this.isSubmittable = isSubmittable;
         this.uiBtn.setIsDisabled(!isSubmittable);
     };
-    UiAuthCreate.prototype.updateIsSubmittable = function () {
-        if (this.password0.length === 0) {
-            this.setIsSubmittable(false);
-            return;
-        }
-        if (this.password0 !== this.password1) {
-            this.setIsSubmittable(false);
-            return;
-        }
+    UiAuthCreate.prototype.handleFormUpdate = function (isSubmit) {
+        if (isSubmit === void 0) { isSubmit = false; }
         this.setIsSubmittable(true);
-    };
-    UiAuthCreate.prototype.onPasswordInput = function () {
-        this.updateIsSubmittable();
+        if (this.password0.length === 0) {
+            this.uiFormGroupPassword0.setErrorMessages(isSubmit, [
+                'Password required'
+            ]);
+            this.setIsSubmittable(false);
+        }
+        else {
+            this.uiFormGroupPassword0.clearErrorMessages();
+        }
+        if (this.password1.length === 0) {
+            this.uiFormGroupPassword1.setErrorMessages(isSubmit, [
+                'Password repeat required'
+            ]);
+            this.setIsSubmittable(false);
+        }
+        else {
+            if (this.password0 !== this.password1) {
+                this.uiFormGroupPassword1.setErrorMessages(isSubmit, [
+                    'Passwords do not match'
+                ]);
+                this.setIsSubmittable(false);
+            }
+            else {
+                this.uiFormGroupPassword1.clearErrorMessages();
+            }
+        }
     };
     UiAuthCreate.prototype.onSubmit = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var dk, keystorePojo;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var startedAt, _a, ellapsed;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        this.updateIsSubmittable();
+                        this.handleFormUpdate(true);
                         if (!this.isSubmittable) {
                             return [2 /*return*/];
                         }
                         this.uiForm.and(hyp_1.then.setIsHidden(true));
                         this.uiCreating.and(hyp_1.then.setIsHidden(false));
-                        return [4 /*yield*/, keythereum_1["default"].create()];
+                        startedAt = utils_1.getTime();
+                        _a = this;
+                        return [4 /*yield*/, Keystore_1.Keystore.generate({
+                                nickname: this.nickname,
+                                password: this.password0
+                            })];
                     case 1:
-                        dk = _a.sent();
-                        return [4 /*yield*/, keythereum_1["default"].dump('password', dk.privateKey, dk.salt, dk.iv)];
+                        _a.keystore = _b.sent();
+                        ellapsed = utils_1.getTime();
+                        if (!(ellapsed < 3000)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, delay_1["default"](3000 - ellapsed)];
                     case 2:
-                        keystorePojo = _a.sent();
-                        this.keystoreBlob = new Blob([JSON.stringify(keystorePojo, null, 2)], { type: "text/plain;charset=utf-8" });
-                        this.download();
-                        this.uiCreating.and(hyp_1.then.setIsHidden(false));
-                        this.uiCreated.and(hyp_1.then.setIsHidden(true));
+                        _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        this.uiCreating.and(hyp_1.then.setIsHidden(true));
+                        this.uiCreated.and(hyp_1.then.setIsHidden(false));
+                        this.keystore.download();
                         return [2 /*return*/];
                 }
             });
         });
-    };
-    UiAuthCreate.prototype.download = function () {
-        file_saver_1["default"].saveAs(this.keystoreBlob, "watsonia-login.txt");
     };
     return UiAuthCreate;
 }(hyp_1.UiDiv));

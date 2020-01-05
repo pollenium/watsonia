@@ -1,9 +1,9 @@
-import { then, UiSpan } from '../hyp'
-import { BootSize } from '../boot'
+import { then, styles } from '../hyp'
+import { UiLinearIcon } from './LinearIcon'
 
-export class UiSpinner extends UiSpan {
+export class UiSpinner extends UiLinearIcon {
   constructor() {
-    super()
-    this.and(then.addClasses('spinner-border', `spinner-border-${BootSize.SM}`))
+    super('sync')
+    this.and(then.setStyles(styles.spin))
   }
 }

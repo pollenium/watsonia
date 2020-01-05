@@ -37,9 +37,12 @@
     "bignumber.js": "^9.0.0",
     "browserify": "^16.5.0",
     "csstype": "^2.6.8",
+    "delay": "^4.3.0",
     "file-saver": "^2.0.2",
     "keythereum": "^1.0.4",
     "lodash.debounce": "^4.0.8",
-    "pollenium-buttercup": "^13.3.1"
+    "pollenium-buttercup": "^13.3.1",
+    "pollenium-ilex": "^6.0.0",
+    "typestyle": "^2.0.4"
   }
 }

@@ -14,14 +14,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
-var boot_1 = require("../boot");
+var LinearIcon_1 = require("./LinearIcon");
 var UiSpinner = /** @class */ (function (_super) {
     __extends(UiSpinner, _super);
     function UiSpinner() {
-        var _this = _super.call(this) || this;
-        _this.and(hyp_1.then.addClasses('spinner-border', "spinner-border-" + boot_1.BootSize.SM));
+        var _this = _super.call(this, 'sync') || this;
+        _this.and(hyp_1.then.setStyles(hyp_1.styles.spin));
         return _this;
     }
     return UiSpinner;
-}(hyp_1.UiSpan));
+}(LinearIcon_1.UiLinearIcon));
 exports.UiSpinner = UiSpinner;

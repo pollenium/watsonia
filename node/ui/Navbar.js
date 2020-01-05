@@ -16,12 +16,13 @@ exports.__esModule = true;
 var hyp_1 = require("../hyp");
 var NavbarNav_1 = require("./NavbarNav");
 var InternalAnchor_1 = require("./InternalAnchor");
+var styles_1 = require("../styles");
 var UiNavbar = /** @class */ (function (_super) {
     __extends(UiNavbar, _super);
     function UiNavbar() {
         var _this = _super.call(this) || this;
         _this
-            .and(hyp_1.then.addClasses('navbar', 'navbar-dark', 'bg-dark', 'sticky-top', 'text-light'))
+            .and(hyp_1.then.addStyles(styles_1.styles.glass, styles_1.styles.dark))
             .and(hyp_1.then.append(new InternalAnchor_1.UiInternalAnchor([])
             .and(hyp_1.then.addClasses('navbar-brand'))
             .and(hyp_1.then.setText('Watsonia'))))

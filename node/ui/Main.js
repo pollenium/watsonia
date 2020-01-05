@@ -14,18 +14,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
-var Container_1 = require("./Container");
-var navigation_1 = require("../navigation");
+var Market_1 = require("./Market");
+var markets_1 = require("../markets");
 var UiMain = /** @class */ (function (_super) {
     __extends(UiMain, _super);
     function UiMain() {
         var _this = _super.call(this) || this;
-        navigation_1.navigation.pageEmitter.on(function (page) {
-            _this.and(hyp_1.then.empty);
-            _this.and(hyp_1.then.append(page));
-        });
+        _this.and(hyp_1.then.setStyle('overflow-y', 'auto'), hyp_1.then.append(new Market_1.UiMarket(markets_1.markets[0])));
         return _this;
     }
     return UiMain;
-}(Container_1.UiContainer));
+}(hyp_1.UiDiv));
 exports.UiMain = UiMain;

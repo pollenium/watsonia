@@ -1,4 +1,6 @@
 import { AndFunc, Ui } from './hyp'
+import { Properties as StyleStruct } from 'csstype'
+import { getIsTouch } from './utils'
 
 export namespace then {
 
@@ -17,6 +19,21 @@ export namespace then {
   export function setStyle(key: string, value: string): AndFunc<Ui<HTMLElement>> {
     return (ui) => {
       ui.element.style[key] = value
+    }
+  }
+
+  export function setStyles(...styleStructs: Array<StyleStruct>): AndFunc<Ui<HTMLElement>> {
+    return (ui) => {
+
+      const styleStuct = {}
+
+      styleStructs.forEach((_styleStruct) => {
+        Object.assign(styleStuct, _styleStruct)
+      })
+
+      Object.keys(styleStuct).forEach((key) => {
+        ui.and(then.setStyle(key, styleStuct[key]))
+      })
     }
   }
 
@@ -49,6 +66,13 @@ export namespace then {
     }
   }
 
+  export function appendTo(parentUi: Ui<HTMLElement>): AndFunc<Ui<HTMLElement>> {
+    return (ui) => {
+      parentUi.and(then.append(ui))
+    }
+  }
+
+
   export function setAttribute(key, value): AndFunc<Ui<HTMLElement>> {
     return (ui) => {
       ui.element.setAttribute(key, value)
@@ -63,7 +87,6 @@ export namespace then {
     }
   }
 
-
   export function setIsHidden(isHidden): AndFunc<Ui<HTMLElement>> {
     return (ui) => {
       if (isHidden) {
@@ -74,6 +97,20 @@ export namespace then {
     }
   }
 
+  export function onDom(eventName: string, onDomFunc): AndFunc<Ui<HTMLElement>> {
+    return (ui) => {
+      ui.element.addEventListener(eventName, onDomFunc)
+    }
+  }
 
+  export function onClick(onClickFunc): AndFunc<Ui<HTMLElement>>  {
+    return (ui) => {
+      if (getIsTouch()) {
+        ui.and(onDom('touchstart', onClickFunc))
+      } else {
+        ui.and(onDom('click', onClickFunc))
+      }
+    }
+  }
 
 }

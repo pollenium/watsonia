@@ -1,10 +1,9 @@
 "use strict";
 exports.__esModule = true;
 var hyp_1 = require("./hyp");
-var Navbar_1 = require("./ui/Navbar");
+var BackgroundGroup_1 = require("./ui/BackgroundGroup");
+var Navbars_1 = require("./ui/Navbars");
 var Main_1 = require("./ui/Main");
-var navigation_1 = require("./navigation");
 exports.app = new hyp_1.UiDiv()
-    .and(hyp_1.then.append(new Navbar_1.UiNavbar(), new Main_1.UiMain()))
-    .element;
-navigation_1.navigation.init();
+    .and(hyp_1.then.append(new BackgroundGroup_1.UiBackgroundGroup(), new hyp_1.UiDiv().and(hyp_1.then.setStyles(hyp_1.styles.flexRows, hyp_1.styles.full), hyp_1.then.append(new Navbars_1.UiNavbars(), new Main_1.UiMain()))));
+document.body.appendChild(exports.app.element);

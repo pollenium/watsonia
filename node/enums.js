@@ -1,23 +1,7 @@
 "use strict";
 exports.__esModule = true;
-var BootSize;
-(function (BootSize) {
-    BootSize["XS"] = "xs";
-    BootSize["SM"] = "sm";
-    BootSize["MD"] = "md";
-    BootSize["LG"] = "lg";
-    BootSize["XL"] = "xl";
-})(BootSize = exports.BootSize || (exports.BootSize = {}));
-var BootColor;
-(function (BootColor) {
-    BootColor["PRIMARY"] = "primary";
-    BootColor["SECONDARY"] = "secondary";
-    BootColor["SUCESS"] = "success";
-    BootColor["DANGER"] = "danger";
-    BootColor["WARNING"] = "warning";
-    BootColor["INFO"] = "info";
-    BootColor["LIGHT"] = "light";
-    BootColor["DARK"] = "dark";
-    BootColor["MUTED"] = "muted";
-    BootColor["WHITE"] = "white";
-})(BootColor = exports.BootColor || (exports.BootColor = {}));
+var RESOLUTION;
+(function (RESOLUTION) {
+    RESOLUTION[RESOLUTION["NO"] = 0] = "NO";
+    RESOLUTION[RESOLUTION["YES"] = 1] = "YES";
+})(RESOLUTION = exports.RESOLUTION || (exports.RESOLUTION = {}));

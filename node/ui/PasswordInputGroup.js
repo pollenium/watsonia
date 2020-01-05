@@ -14,24 +14,13 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
-var Icon_1 = require("./Icon");
 var FormControl_1 = require("./FormControl");
 var UiPasswordInputGroup = /** @class */ (function (_super) {
     __extends(UiPasswordInputGroup, _super);
     function UiPasswordInputGroup() {
         var _this = _super.call(this) || this;
         _this.isPasswordVisible = false;
-        _this.and(hyp_1.then.addClasses('input-group'));
         _this.and(hyp_1.then.append(_this.uiFormControl = new FormControl_1.UiFormControl().and(hyp_1.then.setAttribute('type', 'password'))));
-        _this.and(hyp_1.then.append(new hyp_1.UiDiv()
-            .and(hyp_1.then.addClasses('input-group-append'))
-            .and(hyp_1.then.setStyle('cursor', 'pointer'))
-            .and(hyp_1.then.append(new hyp_1.UiSpan()
-            .and(hyp_1.then.addClasses('input-group-text'))
-            .and(hyp_1.then.append(_this.uiIcon = new Icon_1.UiIcon().and(hyp_1.then.addClasses('fas', 'fa-eye'))))
-            .and(function (uiSpan) {
-            uiSpan.element.addEventListener('click', _this.toggleIsPasswordVisible.bind(_this));
-        })))));
         return _this;
     }
     UiPasswordInputGroup.prototype.toggleIsPasswordVisible = function () {

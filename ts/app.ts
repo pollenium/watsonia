@@ -1,15 +1,22 @@
-import { UiDiv, then } from './hyp'
-import { UiNavbar } from './ui/Navbar'
+import { then, styles, UiDiv } from './hyp'
+import { UiBackgroundGroup } from './ui/BackgroundGroup'
+import { UiNavbars } from './ui/Navbars'
 import { UiMain } from './ui/Main'
-import { navigation } from './navigation'
-
 
 export const app =
   new UiDiv()
     .and(then.append(
-      new UiNavbar(),
-      new UiMain()
+      new UiBackgroundGroup(),
+      new UiDiv().and(
+        then.setStyles(
+          styles.flexRows,
+          styles.full
+        ),
+        then.append(
+          new UiNavbars(),
+          new UiMain()
+        )
+      )
     ))
-    .element
 
-navigation.init()
+document.body.appendChild(app.element)

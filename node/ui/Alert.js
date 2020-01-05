@@ -16,10 +16,8 @@ exports.__esModule = true;
 var hyp_1 = require("../hyp");
 var UiAlert = /** @class */ (function (_super) {
     __extends(UiAlert, _super);
-    function UiAlert(bootColor) {
-        var _this = _super.call(this) || this;
-        _this.and(hyp_1.then.addClasses('alert', "alert-" + bootColor, 'text-center'));
-        return _this;
+    function UiAlert() {
+        return _super.call(this) || this;
     }
     return UiAlert;
 }(hyp_1.UiDiv));

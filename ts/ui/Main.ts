@@ -1,14 +1,16 @@
-import { then } from '../hyp'
-import { UiContainer } from './Container'
-import { navigation } from '../navigation'
+import { then, styles, UiDiv } from '../hyp'
+import { UiMarket } from './Market'
+import { markets } from '../markets'
 
-export class UiMain extends UiContainer {
+export class UiMain extends UiDiv {
   constructor() {
     super()
 
-    navigation.pageEmitter.on((page) => {
-      this.and(then.empty)
-      this.and(then.append(page))
-    })
+    this.and(
+      then.setStyle('overflow-y', 'auto'),
+      then.append(
+        new UiMarket(markets[0])
+      )
+    )
   }
 }

@@ -15,13 +15,33 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 var hyp_then_1 = require("./hyp.then");
 exports.then = hyp_then_1.then;
+var styles_1 = require("./styles");
+exports.styles = styles_1.styles;
 var Ui = /** @class */ (function () {
     function Ui(tag) {
         this.element = document.createElement(tag);
+        this.element.innerHTML = "<!--" + this.constructor.name + "-->";
     }
-    Ui.prototype.and = function (andFunc) {
-        andFunc(this);
+    Ui.prototype.and = function () {
+        var _this = this;
+        var andFuncs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            andFuncs[_i] = arguments[_i];
+        }
+        andFuncs.forEach(function (andFunc) {
+            andFunc(_this);
+        });
         return this;
+    };
+    Ui.prototype.andIf = function (isTrue) {
+        var andFuncs = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            andFuncs[_i - 1] = arguments[_i];
+        }
+        if (!!isTrue !== true) {
+            return this;
+        }
+        return this.and.apply(this, andFuncs);
     };
     return Ui;
 }());
@@ -115,3 +135,12 @@ var UiForm = /** @class */ (function (_super) {
     return UiForm;
 }(Ui));
 exports.UiForm = UiForm;
+var UiImg = /** @class */ (function (_super) {
+    __extends(UiImg, _super);
+    function UiImg(tag) {
+        if (tag === void 0) { tag = 'img'; }
+        return _super.call(this, tag) || this;
+    }
+    return UiImg;
+}(Ui));
+exports.UiImg = UiImg;

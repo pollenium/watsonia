@@ -1,5 +1,7 @@
 export type AndFunc<T> = (ui: T) => void;
 export { then } from './hyp.then'
+export { styles } from './styles'
+
 
 export class Ui<T extends HTMLElement> {
 
@@ -7,11 +9,21 @@ export class Ui<T extends HTMLElement> {
 
   constructor(tag: string) {
     this.element = document.createElement(tag) as T
+    this.element.innerHTML = `<!--${this.constructor.name}-->`
   }
 
-  and(andFunc: AndFunc<this>): this {
-    andFunc(this)
+  and(...andFuncs: Array<AndFunc<this>>): this {
+    andFuncs.forEach((andFunc) => {
+      andFunc(this)
+    })
     return this
+  }
+
+  andIf(isTrue, ...andFuncs: Array<AndFunc<this>>): this {
+    if (!!isTrue !== true) {
+      return this
+    }
+    return this.and(...andFuncs)
   }
 
 }
@@ -72,6 +84,12 @@ export class UiLabel extends Ui<HTMLLabelElement> {
 
 export class UiForm extends Ui<HTMLFormElement> {
   constructor(tag: string = 'form') {
+    super(tag)
+  }
+}
+
+export class UiImg extends Ui<HTMLFormElement> {
+  constructor(tag: string = 'img') {
     super(tag)
   }
 }
