@@ -71,7 +71,7 @@ var UiAuthLogin = /** @class */ (function (_super) {
             event.preventDefault();
             _this.onSubmit();
         }), hyp_1.then.append(_this.uiFormGroupLoginFile = new FormGroupLoginFile_1.UiFormGroupLoginFile().and(function (uiFormControlLoginFile) {
-            uiFormControlLoginFile.keystoreEmitter.on(function (keystore) {
+            uiFormControlLoginFile.keystoreSnowdrop.addHandle(function (keystore) {
                 _this.keystore = keystore;
                 _this.uiFormGroupLoginFile.clearErrorMessages();
                 _this.handleFormUpdate();
@@ -79,7 +79,7 @@ var UiAuthLogin = /** @class */ (function (_super) {
         }), new SpacerLarge_1.UiSpacerLarge, _this.uiFormGroupPassword = new FormGroup_1.UiFormGroup({
             labelText: 'Password:',
             uiFormControl: new FormControlPassword_1.UiFormControlPassword().and(function (uiFormControlPassword) {
-                uiFormControlPassword.valueEmitter.on(function (password) {
+                uiFormControlPassword.valueSnowdrop.addHandle(function (password) {
                     _this.password = password;
                     _this.handleFormUpdate();
                 });

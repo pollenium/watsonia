@@ -81,7 +81,7 @@ var UiAuthCreate = /** @class */ (function (_super) {
             labelText: 'Password:',
             helperText: 'Don\'t forget your password. There is no way to reset it.',
             uiFormControl: new FormControlPassword_1.UiFormControlPassword().and(function (uiFormControlPassword) {
-                uiFormControlPassword.valueEmitter.on(function (password) {
+                uiFormControlPassword.valueSnowdrop.addHandle(function (password) {
                     _this.password0 = password;
                     _this.handleFormUpdate(false);
                 });
@@ -89,7 +89,7 @@ var UiAuthCreate = /** @class */ (function (_super) {
         }), new SpacerLarge_1.UiSpacerLarge, _this.uiFormGroupPassword1 = new FormGroup_1.UiFormGroup({
             labelText: 'Repeat Password:',
             uiFormControl: new FormControlPassword_1.UiFormControlPassword().and(function (uiFormControlPassword) {
-                uiFormControlPassword.valueEmitter.on(function (password) {
+                uiFormControlPassword.valueSnowdrop.addHandle(function (password) {
                     _this.password1 = password;
                     _this.handleFormUpdate(false);
                 });
@@ -98,7 +98,7 @@ var UiAuthCreate = /** @class */ (function (_super) {
             labelText: 'Account Nickname (Optional):',
             uiFormControl: new FormControlText_1.UiFormControlText().and(function (uiFormControlText) {
                 uiFormControlText.setUiPrepend(new LinearIcon_1.UiLinearIcon('label'));
-                uiFormControlText.valueEmitter.on(function (nickname) {
+                uiFormControlText.valueSnowdrop.addHandle(function (nickname) {
                     _this.nickname = nickname;
                 }),
                     uiFormControlText.setValue('First Account');

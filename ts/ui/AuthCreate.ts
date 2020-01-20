@@ -48,7 +48,7 @@ export class UiAuthCreate extends UiDiv {
             uiFormControl:
               new UiFormControlPassword().and(
                 (uiFormControlPassword) => {
-                  uiFormControlPassword.valueEmitter.on((password) => {
+                  uiFormControlPassword.valueSnowdrop.addHandle((password) => {
                     this.password0 = password
                     this.handleFormUpdate(false)
                   })
@@ -60,7 +60,7 @@ export class UiAuthCreate extends UiDiv {
             labelText:  'Repeat Password:',
             uiFormControl: new UiFormControlPassword().and(
               (uiFormControlPassword) => {
-                uiFormControlPassword.valueEmitter.on((password) => {
+                uiFormControlPassword.valueSnowdrop.addHandle((password) => {
                   this.password1 = password
                   this.handleFormUpdate(false)
                 })
@@ -75,7 +75,7 @@ export class UiAuthCreate extends UiDiv {
                 uiFormControlText.setUiPrepend(
                   new UiLinearIcon('label')
                 )
-                uiFormControlText.valueEmitter.on((nickname) => {
+                uiFormControlText.valueSnowdrop.addHandle((nickname) => {
                   this.nickname = nickname
                 }),
                 uiFormControlText.setValue('First Account')

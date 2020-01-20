@@ -45,7 +45,7 @@ export class UiAuthLogin extends UiDiv {
         then.append(
           this.uiFormGroupLoginFile = new UiFormGroupLoginFile().and(
             (uiFormControlLoginFile) => {
-              uiFormControlLoginFile.keystoreEmitter.on((keystore) => {
+              uiFormControlLoginFile.keystoreSnowdrop.addHandle((keystore) => {
                 this.keystore = keystore
                 this.uiFormGroupLoginFile.clearErrorMessages()
                 this.handleFormUpdate()
@@ -56,7 +56,7 @@ export class UiAuthLogin extends UiDiv {
           this.uiFormGroupPassword = new UiFormGroup({
             labelText:  'Password:',
             uiFormControl: new UiFormControlPassword().and((uiFormControlPassword) => {
-              uiFormControlPassword.valueEmitter.on((password) => {
+              uiFormControlPassword.valueSnowdrop.addHandle((password) => {
                 this.password = password
                 this.handleFormUpdate()
               })

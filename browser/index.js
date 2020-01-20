@@ -9,44 +9,7 @@ exports.app = new hyp_1.UiDiv()
     .and(hyp_1.then.append(new BackgroundGroup_1.UiBackgroundGroup(), new hyp_1.UiDiv().and(hyp_1.then.setStyles(hyp_1.styles.flexRows, hyp_1.styles.full), hyp_1.then.append(new Navbars_1.UiNavbars(), new Main_1.UiMain()))));
 document.body.appendChild(exports.app.element);
 
-},{"./hyp":7,"./ui/BackgroundGroup":12,"./ui/Main":15,"./ui/Navbars":20}],2:[function(require,module,exports){
-"use strict";
-exports.__esModule = true;
-var Emitter = /** @class */ (function () {
-    function Emitter() {
-        this.callbacks = [];
-    }
-    Emitter.prototype.on = function (callback) {
-        this.callbacks.push(callback);
-    };
-    Emitter.prototype.once = function (callback) {
-        var _this = this;
-        this.on(function (data) {
-            _this.callbacks.splice(_this.callbacks.indexOf(callback), 1);
-            callback(data);
-        });
-    };
-    Emitter.prototype.emit = function (data) {
-        var _this = this;
-        if (this.callbacks.length === 0) {
-            throw new Error('No Callbacks');
-        }
-        setTimeout(function () {
-            _this.callbacks.forEach(function (callback) {
-                callback(data);
-            });
-        }, 1);
-    };
-    Emitter.prototype.emitIfCallbacks = function (data) {
-        if (this.callbacks.length > 0) {
-            this.emit(data);
-        }
-    };
-    return Emitter;
-}());
-exports.Emitter = Emitter;
-
-},{}],3:[function(require,module,exports){
+},{"./hyp":6,"./ui/BackgroundGroup":11,"./ui/Main":14,"./ui/Navbars":19}],2:[function(require,module,exports){
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -151,7 +114,7 @@ var Market = /** @class */ (function () {
 }());
 exports.Market = Market;
 
-},{"./Token":5,"pollenium-buttercup":36}],4:[function(require,module,exports){
+},{"./Token":4,"pollenium-buttercup":35}],3:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -178,13 +141,13 @@ var Price = /** @class */ (function () {
 }());
 exports.Price = Price;
 
-},{"../constants":6,"bignumber.js":23}],5:[function(require,module,exports){
+},{"../constants":5,"bignumber.js":22}],4:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-var Emitter_1 = require("./Emitter");
+var pollenium_snowdrop_1 = require("pollenium-snowdrop");
 var Price_1 = require("../classes/Price");
 var pollenium_buttercup_1 = require("pollenium-buttercup");
 var constants_1 = require("../constants");
@@ -194,7 +157,7 @@ var simulatedDenom = pollenium_buttercup_1.Uint256.fromNumber(1);
 var Token = /** @class */ (function () {
     function Token(address) {
         this.address = address;
-        this.vwapEmitter = new Emitter_1.Emitter;
+        this.vwapSnowdrop = new pollenium_snowdrop_1.Snowdrop;
         /* TODO: remove */
         this.simulatedVwapBignumber = new bignumber_js_1["default"](Math.random() * .95);
         this.simulateVwaps();
@@ -218,7 +181,7 @@ var Token = /** @class */ (function () {
                 buyy: new Price_1.Price(pollenium_buttercup_1.Uint256.fromBn(buyyPriceNumerBn), simulatedDenom),
                 sell: new Price_1.Price(pollenium_buttercup_1.Uint256.fromBn(sellPriceNumerBn), simulatedDenom)
             };
-            _this.vwapEmitter.emit(vwaps);
+            _this.vwapSnowdrop.emit(vwaps);
             var step = (Math.random() - .5) * .05;
             var simulatedVwapBignumber = _this.simulatedVwapBignumber.plus(step);
             if (simulatedVwapBignumber.lt(.01)) {
@@ -234,7 +197,7 @@ var Token = /** @class */ (function () {
 }());
 exports.Token = Token;
 
-},{"../classes/Price":4,"../constants":6,"./Emitter":2,"bignumber.js":23,"bn.js":24,"pollenium-buttercup":36}],6:[function(require,module,exports){
+},{"../classes/Price":3,"../constants":5,"bignumber.js":22,"bn.js":23,"pollenium-buttercup":35,"pollenium-snowdrop":43}],5:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -243,7 +206,7 @@ exports.__esModule = true;
 var bignumber_js_1 = __importDefault(require("bignumber.js"));
 exports.priceMultiplierBignumber = (new bignumber_js_1["default"](10)).pow(18);
 
-},{"bignumber.js":23}],7:[function(require,module,exports){
+},{"bignumber.js":22}],6:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -391,7 +354,7 @@ var UiImg = /** @class */ (function (_super) {
 }(Ui));
 exports.UiImg = UiImg;
 
-},{"./hyp.then":8,"./styles":11}],8:[function(require,module,exports){
+},{"./hyp.then":7,"./styles":10}],7:[function(require,module,exports){
 "use strict";
 exports.__esModule = true;
 var utils_1 = require("./utils");
@@ -531,13 +494,13 @@ var then;
     then.onClick = onClick;
 })(then = exports.then || (exports.then = {}));
 
-},{"./utils":21}],9:[function(require,module,exports){
+},{"./utils":20}],8:[function(require,module,exports){
 "use strict";
 exports.__esModule = true;
 var app_1 = require("./app");
 exports.app = app_1.app;
 
-},{"./app":1}],10:[function(require,module,exports){
+},{"./app":1}],9:[function(require,module,exports){
 "use strict";
 exports.__esModule = true;
 var Market_1 = require("./classes/Market");
@@ -564,7 +527,7 @@ exports.markets = marketStructs.map(function (marketStruct) {
     return new Market_1.Market(marketStruct.id, marketStruct.name, marketStruct.imageFileName, pollenium_buttercup_1.Address.genNull());
 });
 
-},{"./classes/Market":3,"pollenium-buttercup":36}],11:[function(require,module,exports){
+},{"./classes/Market":2,"pollenium-buttercup":35}],10:[function(require,module,exports){
 "use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
@@ -686,7 +649,7 @@ var styles;
     };
 })(styles = exports.styles || (exports.styles = {}));
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -739,7 +702,7 @@ var UiBackgroundLayer = /** @class */ (function (_super) {
     return UiBackgroundLayer;
 }(hyp_1.UiDiv));
 
-},{"../hyp":7}],13:[function(require,module,exports){
+},{"../hyp":6}],12:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -767,7 +730,7 @@ var UiDivider = /** @class */ (function (_super) {
 }(hyp_1.UiDiv));
 exports.UiDivider = UiDivider;
 
-},{"../hyp":7}],14:[function(require,module,exports){
+},{"../hyp":6}],13:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -803,7 +766,7 @@ var UiLinearIcon = /** @class */ (function (_super) {
 }(hyp_1.Ui));
 exports.UiLinearIcon = UiLinearIcon;
 
-},{"../hyp":7}],15:[function(require,module,exports){
+},{"../hyp":6}],14:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -833,7 +796,7 @@ var UiMain = /** @class */ (function (_super) {
 }(hyp_1.UiDiv));
 exports.UiMain = UiMain;
 
-},{"../hyp":7,"../markets":10,"./Market":16}],16:[function(require,module,exports){
+},{"../hyp":6,"../markets":9,"./Market":15}],15:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -899,7 +862,7 @@ var UiMarket = /** @class */ (function (_super) {
 }(hyp_1.UiDiv));
 exports.UiMarket = UiMarket;
 
-},{"../hyp":7,"./Divider":13,"./NavbarOptionGroup":18}],17:[function(require,module,exports){
+},{"../hyp":6,"./Divider":12,"./NavbarOptionGroup":17}],16:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -935,7 +898,7 @@ var UiNavbarMarkets = /** @class */ (function (_super) {
 }(NavbarOptionGroup_1.UiNavbarOptionGroup));
 exports.UiNavbarMarkets = UiNavbarMarkets;
 
-},{"../hyp":7,"../markets":10,"./NavbarOptionGroup":18}],18:[function(require,module,exports){
+},{"../hyp":6,"../markets":9,"./NavbarOptionGroup":17}],17:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -1039,7 +1002,7 @@ var UiOption = /** @class */ (function (_super) {
     return UiOption;
 }(hyp_1.UiSpan));
 
-},{"../hyp":7}],19:[function(require,module,exports){
+},{"../hyp":6}],18:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -1077,7 +1040,7 @@ var UiNavbarPrimary = /** @class */ (function (_super) {
 }(hyp_1.UiDiv));
 exports.UiNavbarPrimary = UiNavbarPrimary;
 
-},{"../hyp":7,"./LinearIcon":14}],20:[function(require,module,exports){
+},{"../hyp":6,"./LinearIcon":13}],19:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -1112,7 +1075,7 @@ var UiNavbars = /** @class */ (function (_super) {
 }(hyp_1.UiDiv));
 exports.UiNavbars = UiNavbars;
 
-},{"../hyp":7,"./NavbarMarkets":17,"./NavbarPrimary":19}],21:[function(require,module,exports){
+},{"../hyp":6,"./NavbarMarkets":16,"./NavbarPrimary":18}],20:[function(require,module,exports){
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -1200,7 +1163,7 @@ function fetchFileText(file) {
 }
 exports.fetchFileText = fetchFileText;
 
-},{"delay":27}],22:[function(require,module,exports){
+},{"delay":26}],21:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -1354,7 +1317,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 ;(function (globalObject) {
   'use strict';
 
@@ -4258,7 +4221,7 @@ function fromByteArray (uint8) {
   }
 })(this);
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (module, exports) {
   'use strict';
 
@@ -7687,9 +7650,9 @@ function fromByteArray (uint8) {
   };
 })(typeof module === 'undefined' || module, this);
 
-},{"buffer":25}],25:[function(require,module,exports){
+},{"buffer":24}],24:[function(require,module,exports){
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function (Buffer){
 /*!
  * The buffer module from node.js, for the browser.
@@ -9492,7 +9455,7 @@ var hexSliceLookupTable = (function () {
 })()
 
 }).call(this,require("buffer").Buffer)
-},{"base64-js":22,"buffer":26,"ieee754":28}],27:[function(require,module,exports){
+},{"base64-js":21,"buffer":25,"ieee754":27}],26:[function(require,module,exports){
 'use strict';
 
 const createAbortError = () => {
@@ -9562,7 +9525,7 @@ module.exports = delay;
 // TODO: Remove this for the next major release
 module.exports.default = delay;
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -9648,7 +9611,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (Buffer){
 "use strict";
 exports.__esModule = true;
@@ -9711,7 +9674,7 @@ var Buttercup = /** @class */ (function () {
 exports.Buttercup = Buttercup;
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":26}],30:[function(require,module,exports){
+},{"buffer":25}],29:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -9737,7 +9700,7 @@ var DynButtercup = /** @class */ (function (_super) {
 }(Buttercup_1.Buttercup));
 exports.DynButtercup = DynButtercup;
 
-},{"./Buttercup":29}],31:[function(require,module,exports){
+},{"./Buttercup":28}],30:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -9792,7 +9755,7 @@ var FixRightButtercup = /** @class */ (function (_super) {
 }(FixButtercup));
 exports.FixRightButtercup = FixRightButtercup;
 
-},{"../utils/uint8Array":41,"./Buttercup":29}],32:[function(require,module,exports){
+},{"../utils/uint8Array":40,"./Buttercup":28}],31:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -9844,7 +9807,7 @@ var Address = /** @class */ (function (_super) {
 }(fixButtercups_1.FixButtercup));
 exports.Address = Address;
 
-},{"../buttercups/fixButtercups":31,"../utils/from":40}],33:[function(require,module,exports){
+},{"../buttercups/fixButtercups":30,"../utils/from":39}],32:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -9930,7 +9893,7 @@ var Bytes = /** @class */ (function (_super) {
 }(DynButtercup_1.DynButtercup));
 exports.Bytes = Bytes;
 
-},{"../buttercups/DynButtercup":30,"../utils/from":40,"../utils/uint8Array":41}],34:[function(require,module,exports){
+},{"../buttercups/DynButtercup":29,"../utils/from":39,"../utils/uint8Array":40}],33:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -10628,7 +10591,7 @@ var Bytes32 = /** @class */ (function (_super) {
 }(BytesX_1.BytesX));
 exports.Bytes32 = Bytes32;
 
-},{"../internals/BytesX":37,"../utils/from":40}],35:[function(require,module,exports){
+},{"../internals/BytesX":36,"../utils/from":39}],34:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -12191,7 +12154,7 @@ var Uint256 = /** @class */ (function (_super) {
 }(UintX_1.UintX));
 exports.Uint256 = Uint256;
 
-},{"../internals/UintX":38,"../utils/from":40,"../utils/uintMath":42}],36:[function(require,module,exports){
+},{"../internals/UintX":37,"../utils/from":39,"../utils/uintMath":41}],35:[function(require,module,exports){
 "use strict";
 exports.__esModule = true;
 var Buttercup_1 = require("./buttercups/Buttercup");
@@ -12272,7 +12235,7 @@ exports.Bytes30 = bytesXs_1.Bytes30;
 exports.Bytes31 = bytesXs_1.Bytes31;
 exports.Bytes32 = bytesXs_1.Bytes32;
 
-},{"./buttercups/Buttercup":29,"./buttercups/DynButtercup":30,"./buttercups/fixButtercups":31,"./externals/Address":32,"./externals/Bytes":33,"./externals/bytesXs":34,"./externals/uintXs":35}],37:[function(require,module,exports){
+},{"./buttercups/Buttercup":28,"./buttercups/DynButtercup":29,"./buttercups/fixButtercups":30,"./externals/Address":31,"./externals/Bytes":32,"./externals/bytesXs":33,"./externals/uintXs":34}],36:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -12298,7 +12261,7 @@ var BytesX = /** @class */ (function (_super) {
 }(fixButtercups_1.FixRightButtercup));
 exports.BytesX = BytesX;
 
-},{"../buttercups/fixButtercups":31}],38:[function(require,module,exports){
+},{"../buttercups/fixButtercups":30}],37:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -12360,7 +12323,7 @@ var UintX = /** @class */ (function (_super) {
 }(fixButtercups_1.FixLeftButtercup));
 exports.UintX = UintX;
 
-},{"../buttercups/fixButtercups":31,"bn.js":43}],39:[function(require,module,exports){
+},{"../buttercups/fixButtercups":30,"bn.js":42}],38:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -12420,7 +12383,7 @@ function assertIsValidHexish(hexish) {
 }
 exports.assertIsValidHexish = assertIsValidHexish;
 
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -12463,7 +12426,7 @@ function uintNumber(ExternalClass, number) {
 }
 exports.uintNumber = uintNumber;
 
-},{"./uint8Array":41,"bn.js":43}],41:[function(require,module,exports){
+},{"./uint8Array":40,"bn.js":42}],40:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -12523,7 +12486,7 @@ function fromHexish(hexish) {
 }
 exports.fromHexish = fromHexish;
 
-},{"./assertIsValidHexish":39}],42:[function(require,module,exports){
+},{"./assertIsValidHexish":38}],41:[function(require,module,exports){
 "use strict";
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
@@ -12576,7 +12539,7 @@ function mod(UintClass, a, b) {
 }
 exports.mod = mod;
 
-},{"./from":40,"bn.js":43}],43:[function(require,module,exports){
+},{"./from":39,"bn.js":42}],42:[function(require,module,exports){
 (function (module, exports) {
   'use strict';
 
@@ -16108,5 +16071,95 @@ exports.mod = mod;
   };
 })(typeof module === 'undefined' || module, this);
 
-},{"buffer":25}]},{},[9])(9)
+},{"buffer":24}],43:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
+var SnowdropError = /** @class */ (function (_super) {
+    __extends(SnowdropError, _super);
+    function SnowdropError(message) {
+        return _super.call(this, "Snowdrop: " + message) || this;
+    }
+    return SnowdropError;
+}(Error));
+exports.SnowdropError = SnowdropError;
+var EmitWithoutHandlesError = /** @class */ (function (_super) {
+    __extends(EmitWithoutHandlesError, _super);
+    function EmitWithoutHandlesError() {
+        return _super.call(this, 'Emitted without any handles') || this;
+    }
+    return EmitWithoutHandlesError;
+}(SnowdropError));
+exports.EmitWithoutHandlesError = EmitWithoutHandlesError;
+var RemovingNonExistantHandleError = /** @class */ (function (_super) {
+    __extends(RemovingNonExistantHandleError, _super);
+    function RemovingNonExistantHandleError(handleId) {
+        return _super.call(this, "Trying to remove a handle that doesn't exist: " + handleId.value) || this;
+    }
+    return RemovingNonExistantHandleError;
+}(SnowdropError));
+exports.RemovingNonExistantHandleError = RemovingNonExistantHandleError;
+var HandleId = /** @class */ (function () {
+    function HandleId(value) {
+        this.value = value;
+    }
+    HandleId.prototype.genNext = function () {
+        return new HandleId(this.value + 1);
+    };
+    return HandleId;
+}());
+exports.HandleId = HandleId;
+var Snowdrop = /** @class */ (function () {
+    function Snowdrop() {
+        this.nextHandleId = new HandleId(0);
+        this.handlesById = {};
+        this.handlesCount = 0;
+    }
+    Snowdrop.prototype.addHandle = function (handle) {
+        var handleId = this.nextHandleId;
+        this.handlesById[handleId.value] = handle;
+        this.nextHandleId = this.nextHandleId.genNext();
+        this.handlesCount += 1;
+        return handleId;
+    };
+    Snowdrop.prototype.removeHandleById = function (id) {
+        var handle = this.handlesById[id.value];
+        if (!handle) {
+            throw new RemovingNonExistantHandleError(id);
+        }
+        this.handlesCount -= 1;
+    };
+    Snowdrop.prototype.emit = function (data) {
+        if (this.handlesCount === 0) {
+            throw new EmitWithoutHandlesError();
+        }
+        for (var i = 0; i < this.nextHandleId.value; i++) {
+            var handle = this.handlesById[i];
+            if (handle) {
+                handle(data);
+            }
+        }
+    };
+    Snowdrop.prototype.emitIfHandle = function (data) {
+        if (this.nextHandleId.value > 0) {
+            this.emit(data);
+        }
+    };
+    return Snowdrop;
+}());
+exports.Snowdrop = Snowdrop;
+
+},{}]},{},[8])(8)
 });

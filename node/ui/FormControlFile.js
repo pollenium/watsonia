@@ -51,12 +51,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
 var FormControl_1 = require("./FormControl");
-var Emitter_1 = require("../classes/Emitter");
+var pollenium_snowdrop_1 = require("pollenium-snowdrop");
 var UiFormControlFile = /** @class */ (function (_super) {
     __extends(UiFormControlFile, _super);
     function UiFormControlFile() {
         var _this = _super.call(this) || this;
-        _this.fileEmitter = new Emitter_1.Emitter();
+        _this.fileSnowdrop = new pollenium_snowdrop_1.Snowdrop();
         var uiFileInput = new hyp_1.UiInput().and(hyp_1.then.setAttribute('type', 'file'), hyp_1.then.setStyles({
             opacity: 0
         }), hyp_1.then.onDom('input', function (event) { return __awaiter(_this, void 0, void 0, function () {
@@ -64,7 +64,7 @@ var UiFormControlFile = /** @class */ (function (_super) {
                 if (!event.target.files || event.target.files.length == 0) {
                     return [2 /*return*/];
                 }
-                this.fileEmitter.emit(event.target.files[0]);
+                this.fileSnowdrop.emit(event.target.files[0]);
                 return [2 /*return*/];
             });
         }); }));

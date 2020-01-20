@@ -1,14 +1,14 @@
 import { UiFormGroup } from './FormGroup'
 import { UiFormControlFile } from './FormControlFile'
 import { UiLinearIcon } from './LinearIcon'
-import { Emitter } from '../classes/Emitter'
+import { Snowdrop } from 'pollenium-snowdrop'
 import { Keystore } from '../classes/Keystore'
 
 
 export class UiFormGroupLoginFile extends UiFormGroup {
 
   private uiFormControlFile: UiFormControlFile
-  public keystoreEmitter: Emitter<Keystore> = new Emitter<Keystore>()
+  public keystoreSnowdrop: Snowdrop<Keystore> = new Snowdrop<Keystore>()
 
   constructor() {
     super({
@@ -21,14 +21,14 @@ export class UiFormGroupLoginFile extends UiFormGroup {
         uiFormControlFile.setUiPrepend(
           new UiLinearIcon('file-lock')
         )
-        uiFormControlFile.fileEmitter.on(this.onFile.bind(this))
+        uiFormControlFile.fileSnowdrop.addHandle(this.onFile.bind(this))
       })
     )
   }
   private async onFile(file: File) {
     await Keystore.fromFile(file).then((keystore) => {
       this.uiFormControlFile.setText(keystore.getName())
-      this.keystoreEmitter.emit(keystore)
+      this.keystoreSnowdrop.emit(keystore)
       this.clearErrorMessages()
     }).catch(() => {
       this.uiFormControlFile.setText(file.name)

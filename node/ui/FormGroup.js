@@ -40,7 +40,7 @@ var UiFormGroup = /** @class */ (function (_super) {
     UiFormGroup.prototype.setUiFormControl = function (uiFormControl) {
         var _this = this;
         this.uiFormControlWrapper.and(hyp_1.then.empty, hyp_1.then.append(uiFormControl));
-        uiFormControl.valueEmitter.on(function (value) {
+        uiFormControl.valueSnowdrop.addHandle(function (value) {
             _this.isTouched = true;
         });
     };

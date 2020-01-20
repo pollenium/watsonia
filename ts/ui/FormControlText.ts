@@ -1,6 +1,6 @@
 import { then, styles, UiInput } from '../hyp'
 import { UiFormControl } from './FormControl'
-import { Emitter } from '../classes/Emitter'
+import { Snowdrop } from 'pollenium-snowdrop'
 import { UiLinearIcon } from './LinearIcon'
 
 export class UiFormControlText extends UiFormControl {

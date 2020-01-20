@@ -52,7 +52,7 @@ exports.__esModule = true;
 var FormGroup_1 = require("./FormGroup");
 var FormControlFile_1 = require("./FormControlFile");
 var LinearIcon_1 = require("./LinearIcon");
-var Emitter_1 = require("../classes/Emitter");
+var pollenium_snowdrop_1 = require("pollenium-snowdrop");
 var Keystore_1 = require("../classes/Keystore");
 var UiFormGroupLoginFile = /** @class */ (function (_super) {
     __extends(UiFormGroupLoginFile, _super);
@@ -61,10 +61,10 @@ var UiFormGroupLoginFile = /** @class */ (function (_super) {
             labelText: 'Login File:',
             helperText: 'It should be named something like "Watsonia Login - Nickname.txt"'
         }) || this;
-        _this.keystoreEmitter = new Emitter_1.Emitter();
+        _this.keystoreSnowdrop = new pollenium_snowdrop_1.Snowdrop();
         _this.setUiFormControl(_this.uiFormControlFile = new FormControlFile_1.UiFormControlFile().and(function (uiFormControlFile) {
             uiFormControlFile.setUiPrepend(new LinearIcon_1.UiLinearIcon('file-lock'));
-            uiFormControlFile.fileEmitter.on(_this.onFile.bind(_this));
+            uiFormControlFile.fileSnowdrop.addHandle(_this.onFile.bind(_this));
         }));
         return _this;
     }
@@ -75,7 +75,7 @@ var UiFormGroupLoginFile = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, Keystore_1.Keystore.fromFile(file).then(function (keystore) {
                             _this.uiFormControlFile.setText(keystore.getName());
-                            _this.keystoreEmitter.emit(keystore);
+                            _this.keystoreSnowdrop.emit(keystore);
                             _this.clearErrorMessages();
                         })["catch"](function () {
                             _this.uiFormControlFile.setText(file.name);

@@ -54,7 +54,7 @@ export class UiFormGroup extends UiDiv {
       then.append(uiFormControl)
     )
 
-    uiFormControl.valueEmitter.on((value) => {
+    uiFormControl.valueSnowdrop.addHandle((value) => {
       this.isTouched = true
     })
   }

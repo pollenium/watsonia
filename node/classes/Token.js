@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-var Emitter_1 = require("./Emitter");
+var pollenium_snowdrop_1 = require("pollenium-snowdrop");
 var Price_1 = require("../classes/Price");
 var pollenium_buttercup_1 = require("pollenium-buttercup");
 var constants_1 = require("../constants");
@@ -13,7 +13,7 @@ var simulatedDenom = pollenium_buttercup_1.Uint256.fromNumber(1);
 var Token = /** @class */ (function () {
     function Token(address) {
         this.address = address;
-        this.vwapEmitter = new Emitter_1.Emitter;
+        this.vwapSnowdrop = new pollenium_snowdrop_1.Snowdrop;
         /* TODO: remove */
         this.simulatedVwapBignumber = new bignumber_js_1["default"](Math.random() * .95);
         this.simulateVwaps();
@@ -37,7 +37,7 @@ var Token = /** @class */ (function () {
                 buyy: new Price_1.Price(pollenium_buttercup_1.Uint256.fromBn(buyyPriceNumerBn), simulatedDenom),
                 sell: new Price_1.Price(pollenium_buttercup_1.Uint256.fromBn(sellPriceNumerBn), simulatedDenom)
             };
-            _this.vwapEmitter.emit(vwaps);
+            _this.vwapSnowdrop.emit(vwaps);
             var step = (Math.random() - .5) * .05;
             var simulatedVwapBignumber = _this.simulatedVwapBignumber.plus(step);
             if (simulatedVwapBignumber.lt(.01)) {

@@ -1,12 +1,12 @@
 import { then, styles, UiInput, UiDiv } from '../hyp'
 import { UiFormControl } from './FormControl'
 import { UiLinearIcon } from './LinearIcon'
-import { Emitter } from '../classes/Emitter'
+import { Snowdrop } from 'pollenium-snowdrop'
 
 export class UiFormControlFile extends UiFormControl {
 
   private uiTextWrapper: UiDiv
-  public fileEmitter: Emitter<File> = new Emitter<File>()
+  public fileSnowdrop: Snowdrop<File> = new Snowdrop<File>()
 
   constructor() {
     super()
@@ -20,7 +20,7 @@ export class UiFormControlFile extends UiFormControl {
         if (!event.target.files || event.target.files.length == 0) {
           return
         }
-        this.fileEmitter.emit(event.target.files[0])
+        this.fileSnowdrop.emit(event.target.files[0])
       })
     )
 

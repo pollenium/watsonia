@@ -1,5 +1,5 @@
 import { then, styles, UiDiv, UiInput, Ui } from '../hyp'
-import { Emitter } from '../classes/Emitter'
+import { Snowdrop } from 'pollenium-snowdrop'
 
 
 const colorDefault = '#666'
@@ -11,7 +11,7 @@ export class UiFormControl extends UiDiv {
   private uiAppendWrapper: UiDiv
   private uiViewWrapper: UiDiv
   private uiInput: UiInput
-  public valueEmitter: Emitter<string> = new Emitter<string>()
+  public valueSnowdrop: Snowdrop<string> = new Snowdrop<string>()
 
   constructor() {
     super()
@@ -46,7 +46,7 @@ export class UiFormControl extends UiDiv {
 
   setValue(value: string) {
     this.uiInput.element.value = value
-    this.valueEmitter.emit(value)
+    this.valueSnowdrop.emit(value)
   }
 
   setUiInput(uiInput: UiInput) {
@@ -56,7 +56,7 @@ export class UiFormControl extends UiDiv {
 
     uiInput.and(
       then.onDom('input', () => {
-        this.valueEmitter.emit(uiInput.element.value)
+        this.valueSnowdrop.emit(uiInput.element.value)
       }),
       then.setStyles(
         styles.transitionAll,

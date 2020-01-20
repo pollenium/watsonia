@@ -18,7 +18,7 @@ var NavbarOptionGroup_1 = require("./NavbarOptionGroup");
 var Divider_1 = require("./Divider");
 var AuthCreate_1 = require("./AuthCreate");
 var AuthLogin_1 = require("./AuthLogin");
-var Emitter_1 = require("../classes/Emitter");
+var pollenium_snowdrop_1 = require("pollenium-snowdrop");
 var AuthState;
 (function (AuthState) {
     AuthState["NULL"] = "null";
@@ -29,7 +29,7 @@ var UiAuth = /** @class */ (function (_super) {
     __extends(UiAuth, _super);
     function UiAuth() {
         var _this = _super.call(this) || this;
-        _this.loginEmitter = new Emitter_1.Emitter();
+        _this.loginSnowdrop = new pollenium_snowdrop_1.Snowdrop();
         _this.and(hyp_1.then.append(_this.uiNavbarOptionGroup = new NavbarOptionGroup_1.UiNavbarOptionGroup()
             .and(function (uiOptionGroup) {
             uiOptionGroup.addLabel('Do you have an Account?');

@@ -14,14 +14,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
-var Emitter_1 = require("../classes/Emitter");
+var pollenium_snowdrop_1 = require("pollenium-snowdrop");
 var colorDefault = '#666';
 var colorFocus = 'white';
 var UiFormControl = /** @class */ (function (_super) {
     __extends(UiFormControl, _super);
     function UiFormControl() {
         var _this = _super.call(this) || this;
-        _this.valueEmitter = new Emitter_1.Emitter();
+        _this.valueSnowdrop = new pollenium_snowdrop_1.Snowdrop();
         _this.and(hyp_1.then.setStyles(hyp_1.styles.fullWidth, hyp_1.styles.transitionAll, hyp_1.styles.flexColumns, {
             borderBottom: "1px solid " + colorDefault
         }), hyp_1.then.append(_this.uiPrependWrapper = new hyp_1.UiDiv().and(hyp_1.then.setIsHidden(true), hyp_1.then.setStyles({
@@ -33,13 +33,13 @@ var UiFormControl = /** @class */ (function (_super) {
     }
     UiFormControl.prototype.setValue = function (value) {
         this.uiInput.element.value = value;
-        this.valueEmitter.emit(value);
+        this.valueSnowdrop.emit(value);
     };
     UiFormControl.prototype.setUiInput = function (uiInput) {
         var _this = this;
         this.uiInput = uiInput;
         uiInput.and(hyp_1.then.onDom('input', function () {
-            _this.valueEmitter.emit(uiInput.element.value);
+            _this.valueSnowdrop.emit(uiInput.element.value);
         }), hyp_1.then.setStyles(hyp_1.styles.transitionAll, {
             backgroundColor: 'transparent',
             border: 'none',

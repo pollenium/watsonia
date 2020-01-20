@@ -1,4 +1,4 @@
-import { Emitter } from './Emitter'
+import { Snowdrop } from 'pollenium-snowdrop'
 import { Address } from 'pollenium-buttercup'
 import { Price } from '../classes/Price'
 import { Vwaps } from '../interfaces/Vwaps'
@@ -11,7 +11,7 @@ const simulatedDenom = Uint256.fromNumber(1)
 
 export class Token {
 
-  public vwapEmitter: Emitter<Vwaps> = new Emitter;
+  public vwapSnowdrop: Snowdrop<Vwaps> = new Snowdrop;
 
   /* TODO: remove */
   private simulatedVwapBignumber: Bignumber = new Bignumber(Math.random() * .95);
@@ -54,7 +54,7 @@ export class Token {
         )
       }
 
-      this.vwapEmitter.emit(vwaps)
+      this.vwapSnowdrop.emit(vwaps)
 
       const step = (Math.random() - .5) * .05
       let simulatedVwapBignumber = this.simulatedVwapBignumber.plus(step)

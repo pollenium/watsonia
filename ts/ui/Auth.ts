@@ -3,7 +3,7 @@ import { UiNavbarOptionGroup } from './NavbarOptionGroup'
 import { UiDivider } from './Divider'
 import { UiAuthCreate } from './AuthCreate'
 import { UiAuthLogin } from './AuthLogin'
-import { Emitter } from '../classes/Emitter'
+import { Snowdrop } from 'pollenium-snowdrop'
 
 export enum AuthState {
   NULL = 'null',
@@ -15,7 +15,7 @@ export class UiAuth extends UiDiv {
 
   private uiNavbarOptionGroup: UiNavbarOptionGroup
   private uiDisplay: UiDiv
-  private loginEmitter: Emitter<void> = new Emitter<void>()
+  private loginSnowdrop: Snowdrop<void> = new Snowdrop<void>()
 
   constructor() {
     super()
