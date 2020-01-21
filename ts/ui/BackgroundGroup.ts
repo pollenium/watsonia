@@ -18,7 +18,7 @@ export class UiBackgroundGroup extends UiDiv {
       this.uiBackgroundLayer1 = new UiBackgroundLayer
     ))
 
-    this.setImageUrl('/media/market-images/trump-shocked.jpg')
+    this.setImageUrl('./media/market-images/trump-shocked.jpg')
   }
 
   setImageUrl(imageUrl: string) {
