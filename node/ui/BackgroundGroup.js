@@ -21,7 +21,7 @@ var UiBackgroundGroup = /** @class */ (function (_super) {
         _this.and(hyp_1.then.setStyles(hyp_1.styles.full, hyp_1.styles.positionAbsolute, {
             zIndex: -1
         })).and(hyp_1.then.append(_this.uiBackgroundLayer0 = new UiBackgroundLayer, _this.uiBackgroundLayer1 = new UiBackgroundLayer));
-        _this.setImageUrl('/media/market-images/trump-shocked.jpg');
+        _this.setImageUrl('./media/market-images/trump-shocked.jpg');
         return _this;
     }
     UiBackgroundGroup.prototype.setImageUrl = function (imageUrl) {

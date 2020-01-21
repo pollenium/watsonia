@@ -40,20 +40,26 @@ export class UiMarket extends UiDiv {
             id: Section.PRICES,
             text: 'Prices',
             onSelect: () => {
-              this.setUiSection(new UiDiv().and(then.setText('Prices')))
+              this.setUiSection(new UiDiv().and(
+                then.setStyles(styles.container, styles.pad),
+                then.setText('Prices')
+              ))
             },
             isSelected: true
           },{
             id: Section.MARKET,
             text: 'Market',
             onSelect: () => {
-              this.setUiSection(new UiDiv().and(then.setText('Market')))
+              this.setUiSection(new UiDiv().and(
+                then.setStyles(styles.container, styles.pad),
+                then.setText('Market')
+              ))
             }
           }, {
             id: Section.TRADE,
             text: 'Trade',
             onSelect: () => {
-              this.setUiSection(new UiDiv().and(then.setText('Trade')))
+              this.setUiSection(new UiDiv().and(then.append(new UiAuth)))
             }
           })
         }),

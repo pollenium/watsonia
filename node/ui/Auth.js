@@ -47,7 +47,6 @@ var UiAuth = /** @class */ (function (_super) {
                 }
             });
         }), _this.uiDisplay = new hyp_1.UiDiv()));
-        _this.setAuthState(AuthState.LOGIN);
         return _this;
     }
     UiAuth.prototype.setAuthState = function (authState) {

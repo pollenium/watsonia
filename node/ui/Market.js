@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 var hyp_1 = require("../hyp");
 var NavbarOptionGroup_1 = require("./NavbarOptionGroup");
+var Auth_1 = require("./Auth");
 var Divider_1 = require("./Divider");
 var Section;
 (function (Section) {
@@ -37,20 +38,20 @@ var UiMarket = /** @class */ (function (_super) {
                 id: Section.PRICES,
                 text: 'Prices',
                 onSelect: function () {
-                    _this.setUiSection(new hyp_1.UiDiv().and(hyp_1.then.setText('Prices')));
+                    _this.setUiSection(new hyp_1.UiDiv().and(hyp_1.then.setStyles(hyp_1.styles.container, hyp_1.styles.pad), hyp_1.then.setText('Prices')));
                 },
                 isSelected: true
             }, {
                 id: Section.MARKET,
                 text: 'Market',
                 onSelect: function () {
-                    _this.setUiSection(new hyp_1.UiDiv().and(hyp_1.then.setText('Market')));
+                    _this.setUiSection(new hyp_1.UiDiv().and(hyp_1.then.setStyles(hyp_1.styles.container, hyp_1.styles.pad), hyp_1.then.setText('Market')));
                 }
             }, {
                 id: Section.TRADE,
                 text: 'Trade',
                 onSelect: function () {
-                    _this.setUiSection(new hyp_1.UiDiv().and(hyp_1.then.setText('Trade')));
+                    _this.setUiSection(new hyp_1.UiDiv().and(hyp_1.then.append(new Auth_1.UiAuth)));
                 }
             });
         }), new Divider_1.UiDivider(), _this.uiSectionWrapper));

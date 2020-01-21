@@ -39,8 +39,6 @@ export class UiAuth extends UiDiv {
         }),
       this.uiDisplay = new UiDiv()
     ))
-
-    this.setAuthState(AuthState.LOGIN)
   }
 
   setAuthState(authState: AuthState) {
