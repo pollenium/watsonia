@@ -88,7 +88,7 @@ var Market = /** @class */ (function () {
         if (this.imageUrl) {
             return this.imageUrl;
         }
-        this.imageUrl = "/media/market-images/" + this.imageFileName;
+        this.imageUrl = "./media/market-images/" + this.imageFileName;
         return this.imageUrl;
     };
     Market.prototype.fetchTokenAddress = function (resolution) {
